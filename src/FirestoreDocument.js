@@ -25,12 +25,25 @@ class FirestoreDocument extends Component {
     this.handleUnsubscribe();
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.path !== this.props.path) {
-      this.handleUnsubscribe();
+  //componentWillReceiveProps(nextProps) {
+  //  if (nextProps.path !== this.props.path) {
+  //    this.handleUnsubscribe();
+  //    this.setState({ isLoading: true }, () => this.setupFirestoreListener());
+  //  }
+  //}
 
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.path !== this.state.path) {
+      this.handleUnsubscribe();
       this.setState({ isLoading: true }, () => this.setupFirestoreListener());
     }
+  }
+
+  static getDerivedStateFromProps(nextProps, prevState){
+    if(nextProps.path!==prevState.path){
+      return {path : nextProps.path};
+    }
+    else return null;
   }
 
   handleUnsubscribe() {
