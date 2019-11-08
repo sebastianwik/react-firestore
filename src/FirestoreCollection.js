@@ -38,7 +38,7 @@ class FirestoreCollection extends Component {
     this.handleUnsubscribe();
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (
       nextProps.path !== this.props.path ||
       nextProps.sort !== this.props.sort ||
